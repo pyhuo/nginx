@@ -8,28 +8,28 @@ set(ALL_INCS
         src/event
         src/event/modules
         src/os/unix
-        objs
         src/http
         src/http/modules
         src/http/modules/perl
         src/http/modules/v2
-        )
-
-set(CORE_INCS
-        src/core
-        src/event
-        src/event/modules
-        src/os/unix
         objs
         )
 
-set(CORE_INCS
-        src/core
-        src/event
-        src/event/modules
-        src/os/unix
-        objs
-        )
+#set(CORE_INCS
+#        src/core
+#        src/event
+#        src/event/modules
+#        src/os/unix
+#        objs
+#        )
+
+#set(CORE_INCS
+#        src/core
+#        src/event
+#        src/event/modules
+#        src/os/unix
+#        objs
+#        )
 
 set(CORE_DEPS
         src/core/nginx.h
@@ -93,16 +93,16 @@ set(CORE_DEPS
         src/os/unix/ngx_darwin.h
         objs/ngx_auto_config.h
         )
-set(CORE_INCS
-        src/core
-        src/event
-        src/event/modules
-        src/os/unix
-        objs
-        )
+#set(CORE_INCS
+#        src/core
+#        src/event
+#        src/event/modules
+#        src/os/unix
+#        objs
+#        )
 
 include_directories(${ALL_INCS})
-#include_directories(${CORE_DEPS})
+include_directories(${CORE_DEPS})
 set(CMAKE_C_FLAGS
         "-pipe  -O -Wall -Wextra -Wpointer-arith -Wconditional-uninitialized -Wno-unused-parameter -Wno-deprecated-declarations -Werror -g "
         )
@@ -146,6 +146,7 @@ set(SOURCE_FILES
         src/event/ngx_event_timer.c
         src/event/ngx_event_posted.c
         src/event/ngx_event_accept.c
+        src/event/ngx_event_udp.c
         src/event/ngx_event_connect.c
         src/event/ngx_event_pipe.c
         src/os/unix/ngx_time.c
@@ -201,6 +202,8 @@ set(SOURCE_FILES
         src/http/modules/ngx_http_static_module.c
         src/http/modules/ngx_http_autoindex_module.c
         src/http/modules/ngx_http_index_module.c
+        src/http/modules/ngx_http_mirror_module.c
+        src/http/modules/ngx_http_try_files_module.c
         src/http/modules/ngx_http_auth_basic_module.c
         src/http/modules/ngx_http_access_module.c
         src/http/modules/ngx_http_limit_conn_module.c
@@ -220,8 +223,11 @@ set(SOURCE_FILES
         src/http/modules/ngx_http_upstream_hash_module.c
         src/http/modules/ngx_http_upstream_ip_hash_module.c
         src/http/modules/ngx_http_upstream_least_conn_module.c
+        src/http/modules/ngx_http_upstream_random_module.c
         src/http/modules/ngx_http_upstream_keepalive_module.c
         src/http/modules/ngx_http_upstream_zone_module.c
+        objs/ngx_modules.c
         )
+
 add_executable(nginx ${SOURCE_FILES})
 target_link_libraries(nginx -lpcre -lz)

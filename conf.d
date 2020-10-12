@@ -1,0 +1,1 @@
+/Users/huoyinghui/github/notes/nginx/conf.d
