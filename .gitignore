@@ -1,0 +1,22 @@
+.DS_Store
+*.swp
+*.pyc
+*.pyo
+*.mo
+*.xml
+*adminx.py
+.coverage
+# 数据库文件
+dump.rdb
+*.sqlite3
+
+
+# soft link
+conf
+config.sh
+
+
+.idea/
+cmake-build-debug/
+objs/
+logs/
