@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.6)
 project(nginx)
 
 set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_FLAGS
+        "-pipe  -O -Wall -Wextra -Wpointer-arith -Wconditional-uninitialized -Wno-unused-parameter -Wno-deprecated-declarations -Werror -g "
+        )
 
 set(ALL_INCS
         src/core
@@ -103,9 +106,6 @@ set(CORE_DEPS
 
 include_directories(${ALL_INCS})
 #include_directories(${CORE_DEPS})
-set(CMAKE_C_FLAGS
-        "-pipe  -O -Wall -Wextra -Wpointer-arith -Wconditional-uninitialized -Wno-unused-parameter -Wno-deprecated-declarations -Werror -g "
-        )
 set(SOURCE_FILES
         src/core/nginx.c
         src/core/ngx_log.c
