@@ -102,7 +102,7 @@ set(CORE_DEPS
 #        )
 
 include_directories(${ALL_INCS})
-include_directories(${CORE_DEPS})
+#include_directories(${CORE_DEPS})
 set(CMAKE_C_FLAGS
         "-pipe  -O -Wall -Wextra -Wpointer-arith -Wconditional-uninitialized -Wno-unused-parameter -Wno-deprecated-declarations -Werror -g "
         )

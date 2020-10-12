@@ -2,6 +2,7 @@
 *.swp
 *.pyc
 *.pyo
+*.o
 *.mo
 *.xml
 *adminx.py
@@ -18,5 +19,5 @@ config.sh
 
 .idea/
 cmake-build-debug/
-objs/
+#objs/
 logs/
