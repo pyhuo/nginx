@@ -207,6 +207,7 @@ objs/nginx:	objs/src/core/nginx.o \
 	objs/src/http/modules/ngx_http_limit_conn_module.o \
 	objs/src/http/modules/ngx_http_limit_req_module.o \
 	objs/src/http/modules/ngx_http_geo_module.o \
+	objs/src/http/modules/ngx_http_mytest_module.o \
 	objs/src/http/modules/ngx_http_map_module.o \
 	objs/src/http/modules/ngx_http_split_clients_module.o \
 	objs/src/http/modules/ngx_http_referer_module.o \
@@ -329,6 +330,7 @@ objs/nginx:	objs/src/core/nginx.o \
 	objs/src/http/modules/ngx_http_limit_conn_module.o \
 	objs/src/http/modules/ngx_http_limit_req_module.o \
 	objs/src/http/modules/ngx_http_geo_module.o \
+	objs/src/http/modules/ngx_http_mytest_module.o \
 	objs/src/http/modules/ngx_http_map_module.o \
 	objs/src/http/modules/ngx_http_split_clients_module.o \
 	objs/src/http/modules/ngx_http_referer_module.o \
@@ -1072,6 +1074,12 @@ objs/src/http/modules/ngx_http_geo_module.o:	$(CORE_DEPS) $(HTTP_DEPS) \
 	$(CC) -c $(CFLAGS) $(CORE_INCS) $(HTTP_INCS) \
 		-o objs/src/http/modules/ngx_http_geo_module.o \
 		src/http/modules/ngx_http_geo_module.c
+
+objs/src/http/modules/ngx_http_mytest_module.o:	$(CORE_DEPS) $(HTTP_DEPS) \
+	src/http/modules/ngx_http_mytest_module.c
+	$(CC) -c $(CFLAGS) $(CORE_INCS) $(HTTP_INCS) \
+		-o objs/src/http/modules/ngx_http_mytest_module.o \
+		src/http/modules/ngx_http_mytest_module.c
 
 
 objs/src/http/modules/ngx_http_map_module.o:	$(CORE_DEPS) $(HTTP_DEPS) \

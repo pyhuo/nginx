@@ -16,17 +16,24 @@
 typedef struct ngx_list_part_s  ngx_list_part_t;
 
 struct ngx_list_part_s {
+    //存放数据的指针
     void             *elts;
+    //列表中元素的数量，list_create初始化0，list_push后加一
     ngx_uint_t        nelts;
     ngx_list_part_t  *next;
 };
 
 
 typedef struct {
+    //列表尾
     ngx_list_part_t  *last;
+    //列表头
     ngx_list_part_t   part;
+    //分配的元素大小
     size_t            size;
+    //分配的元素数量. n * size 是part.elts分配的总大小
     ngx_uint_t        nalloc;
+    //池
     ngx_pool_t       *pool;
 } ngx_list_t;
 

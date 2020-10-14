@@ -90,9 +90,11 @@ typedef struct {
 
 
 typedef struct {
+    //hash 值
     ngx_uint_t        hash;
     ngx_str_t         key;
     ngx_str_t         value;
+    // key的小写形式,方便忽略大小写
     u_char           *lowcase_key;
 } ngx_table_elt_t;
 

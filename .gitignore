@@ -20,4 +20,9 @@ config.sh
 .idea/
 cmake-build-debug/
 #objs/
+objs/nginx
+objs/nginx.*
 logs/
+# 调试请求体
+client_body_temp/
+client_temp
