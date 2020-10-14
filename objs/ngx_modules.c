@@ -25,7 +25,7 @@ extern ngx_module_t  ngx_http_access_module;
 extern ngx_module_t  ngx_http_limit_conn_module;
 extern ngx_module_t  ngx_http_limit_req_module;
 extern ngx_module_t  ngx_http_geo_module;
-extern ngx_module_t ngx_http_mytest_module;                 /*add mytest module*/
+extern ngx_module_t  ngx_http_monitor_module;                 /*add my monitor module*/
 extern ngx_module_t  ngx_http_map_module;
 extern ngx_module_t  ngx_http_split_clients_module;
 extern ngx_module_t  ngx_http_referer_module;
@@ -79,7 +79,7 @@ ngx_module_t *ngx_modules[] = {
     &ngx_http_limit_conn_module,
     &ngx_http_limit_req_module,
     &ngx_http_geo_module,
-    &ngx_http_mytest_module,                /*register mytest module*/
+    &ngx_http_monitor_module,                /*register monitor module*/
     &ngx_http_map_module,
     &ngx_http_split_clients_module,
     &ngx_http_referer_module,
@@ -135,6 +135,7 @@ char *ngx_module_names[] = {
     "ngx_http_limit_conn_module",
     "ngx_http_limit_req_module",
     "ngx_http_geo_module",
+    "ngx_http_monitor_module",
     "ngx_http_map_module",
     "ngx_http_split_clients_module",
     "ngx_http_referer_module",

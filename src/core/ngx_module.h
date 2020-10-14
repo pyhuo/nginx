@@ -234,7 +234,10 @@ struct ngx_module_s {
     void                 *ctx;
     ngx_command_t        *commands;
     ngx_uint_t            type;
-
+    /*
+     * 在nginx启动、停止过程中，以下7个函数指针表示有7个这些点会分别调用这7中方法
+     * init_master: master进程启动时调用
+     */
     ngx_int_t           (*init_master)(ngx_log_t *log);
 
     ngx_int_t           (*init_module)(ngx_cycle_t *cycle);

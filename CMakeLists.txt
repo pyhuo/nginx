@@ -209,8 +209,8 @@ set(SOURCE_FILES
         src/http/modules/ngx_http_limit_conn_module.c
         src/http/modules/ngx_http_limit_req_module.c
         src/http/modules/ngx_http_geo_module.c
-        # add mytest
-        src/http/modules/ngx_http_mytest_module.c
+        # add monitor
+        src/http/modules/ngx_http_monitor_module.c
         src/http/modules/ngx_http_map_module.c
         src/http/modules/ngx_http_split_clients_module.c
         src/http/modules/ngx_http_referer_module.c
