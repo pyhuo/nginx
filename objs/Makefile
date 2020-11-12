@@ -1,6 +1,5 @@
 
 CC =	cc
-DESTDIR = $(shell pwd)
 CFLAGS =  -pipe  -O -Wall -Wextra -Wpointer-arith -Wconditional-uninitialized -Wno-unused-parameter -Wno-deprecated-declarations -Werror -g 
 CPP =	cc -E
 LINK =	$(CC)
@@ -12,7 +11,8 @@ ALL_INCS = -I src/core \
 	-I src/os/unix \
 	-I objs \
 	-I src/http \
-	-I src/http/modules
+	-I src/http/modules \
+	-I src/http/v2
 
 
 CORE_DEPS = src/core/nginx.h \
@@ -94,11 +94,14 @@ HTTP_DEPS = src/http/ngx_http.h \
 	src/http/ngx_http_script.h \
 	src/http/ngx_http_upstream.h \
 	src/http/ngx_http_upstream_round_robin.h \
-	src/http/modules/ngx_http_ssi_filter_module.h
+	src/http/modules/ngx_http_ssi_filter_module.h \
+	src/http/v2/ngx_http_v2.h \
+	src/http/v2/ngx_http_v2_module.h
 
 
 HTTP_INCS = -I src/http \
-	-I src/http/modules
+	-I src/http/modules \
+	-I src/http/v2
 
 
 build:	binary modules manpage
@@ -188,6 +191,7 @@ objs/nginx:	objs/src/core/nginx.o \
 	objs/src/http/ngx_http_write_filter_module.o \
 	objs/src/http/ngx_http_header_filter_module.o \
 	objs/src/http/modules/ngx_http_chunked_filter_module.o \
+	objs/src/http/v2/ngx_http_v2_filter_module.o \
 	objs/src/http/modules/ngx_http_range_filter_module.o \
 	objs/src/http/modules/ngx_http_gzip_filter_module.o \
 	objs/src/http/ngx_http_postpone_filter_module.o \
@@ -197,6 +201,12 @@ objs/nginx:	objs/src/core/nginx.o \
 	objs/src/http/modules/ngx_http_headers_filter_module.o \
 	objs/src/http/ngx_http_copy_filter_module.o \
 	objs/src/http/modules/ngx_http_not_modified_filter_module.o \
+	objs/src/http/v2/ngx_http_v2.o \
+	objs/src/http/v2/ngx_http_v2_table.o \
+	objs/src/http/v2/ngx_http_v2_encode.o \
+	objs/src/http/v2/ngx_http_v2_huff_decode.o \
+	objs/src/http/v2/ngx_http_v2_huff_encode.o \
+	objs/src/http/v2/ngx_http_v2_module.o \
 	objs/src/http/modules/ngx_http_static_module.o \
 	objs/src/http/modules/ngx_http_autoindex_module.o \
 	objs/src/http/modules/ngx_http_index_module.o \
@@ -207,7 +217,6 @@ objs/nginx:	objs/src/core/nginx.o \
 	objs/src/http/modules/ngx_http_limit_conn_module.o \
 	objs/src/http/modules/ngx_http_limit_req_module.o \
 	objs/src/http/modules/ngx_http_geo_module.o \
-	objs/src/http/modules/ngx_http_monitor_module.o \
 	objs/src/http/modules/ngx_http_map_module.o \
 	objs/src/http/modules/ngx_http_split_clients_module.o \
 	objs/src/http/modules/ngx_http_referer_module.o \
@@ -216,6 +225,7 @@ objs/nginx:	objs/src/core/nginx.o \
 	objs/src/http/modules/ngx_http_fastcgi_module.o \
 	objs/src/http/modules/ngx_http_uwsgi_module.o \
 	objs/src/http/modules/ngx_http_scgi_module.o \
+	objs/src/http/modules/ngx_http_grpc_module.o \
 	objs/src/http/modules/ngx_http_memcached_module.o \
 	objs/src/http/modules/ngx_http_empty_gif_module.o \
 	objs/src/http/modules/ngx_http_browser_module.o \
@@ -311,6 +321,7 @@ objs/nginx:	objs/src/core/nginx.o \
 	objs/src/http/ngx_http_write_filter_module.o \
 	objs/src/http/ngx_http_header_filter_module.o \
 	objs/src/http/modules/ngx_http_chunked_filter_module.o \
+	objs/src/http/v2/ngx_http_v2_filter_module.o \
 	objs/src/http/modules/ngx_http_range_filter_module.o \
 	objs/src/http/modules/ngx_http_gzip_filter_module.o \
 	objs/src/http/ngx_http_postpone_filter_module.o \
@@ -320,6 +331,12 @@ objs/nginx:	objs/src/core/nginx.o \
 	objs/src/http/modules/ngx_http_headers_filter_module.o \
 	objs/src/http/ngx_http_copy_filter_module.o \
 	objs/src/http/modules/ngx_http_not_modified_filter_module.o \
+	objs/src/http/v2/ngx_http_v2.o \
+	objs/src/http/v2/ngx_http_v2_table.o \
+	objs/src/http/v2/ngx_http_v2_encode.o \
+	objs/src/http/v2/ngx_http_v2_huff_decode.o \
+	objs/src/http/v2/ngx_http_v2_huff_encode.o \
+	objs/src/http/v2/ngx_http_v2_module.o \
 	objs/src/http/modules/ngx_http_static_module.o \
 	objs/src/http/modules/ngx_http_autoindex_module.o \
 	objs/src/http/modules/ngx_http_index_module.o \
@@ -330,7 +347,6 @@ objs/nginx:	objs/src/core/nginx.o \
 	objs/src/http/modules/ngx_http_limit_conn_module.o \
 	objs/src/http/modules/ngx_http_limit_req_module.o \
 	objs/src/http/modules/ngx_http_geo_module.o \
-	objs/src/http/modules/ngx_http_monitor_module.o \
 	objs/src/http/modules/ngx_http_map_module.o \
 	objs/src/http/modules/ngx_http_split_clients_module.o \
 	objs/src/http/modules/ngx_http_referer_module.o \
@@ -339,6 +355,7 @@ objs/nginx:	objs/src/core/nginx.o \
 	objs/src/http/modules/ngx_http_fastcgi_module.o \
 	objs/src/http/modules/ngx_http_uwsgi_module.o \
 	objs/src/http/modules/ngx_http_scgi_module.o \
+	objs/src/http/modules/ngx_http_grpc_module.o \
 	objs/src/http/modules/ngx_http_memcached_module.o \
 	objs/src/http/modules/ngx_http_empty_gif_module.o \
 	objs/src/http/modules/ngx_http_browser_module.o \
@@ -943,6 +960,13 @@ objs/src/http/modules/ngx_http_chunked_filter_module.o:	$(CORE_DEPS) $(HTTP_DEPS
 		src/http/modules/ngx_http_chunked_filter_module.c
 
 
+objs/src/http/v2/ngx_http_v2_filter_module.o:	$(CORE_DEPS) $(HTTP_DEPS) \
+	src/http/v2/ngx_http_v2_filter_module.c
+	$(CC) -c $(CFLAGS) $(CORE_INCS) $(HTTP_INCS) \
+		-o objs/src/http/v2/ngx_http_v2_filter_module.o \
+		src/http/v2/ngx_http_v2_filter_module.c
+
+
 objs/src/http/modules/ngx_http_range_filter_module.o:	$(CORE_DEPS) $(HTTP_DEPS) \
 	src/http/modules/ngx_http_range_filter_module.c
 	$(CC) -c $(CFLAGS) $(CORE_INCS) $(HTTP_INCS) \
@@ -1004,6 +1028,48 @@ objs/src/http/modules/ngx_http_not_modified_filter_module.o:	$(CORE_DEPS) $(HTTP
 	$(CC) -c $(CFLAGS) $(CORE_INCS) $(HTTP_INCS) \
 		-o objs/src/http/modules/ngx_http_not_modified_filter_module.o \
 		src/http/modules/ngx_http_not_modified_filter_module.c
+
+
+objs/src/http/v2/ngx_http_v2.o:	$(CORE_DEPS) $(HTTP_DEPS) \
+	src/http/v2/ngx_http_v2.c
+	$(CC) -c $(CFLAGS) $(CORE_INCS) $(HTTP_INCS) \
+		-o objs/src/http/v2/ngx_http_v2.o \
+		src/http/v2/ngx_http_v2.c
+
+
+objs/src/http/v2/ngx_http_v2_table.o:	$(CORE_DEPS) $(HTTP_DEPS) \
+	src/http/v2/ngx_http_v2_table.c
+	$(CC) -c $(CFLAGS) $(CORE_INCS) $(HTTP_INCS) \
+		-o objs/src/http/v2/ngx_http_v2_table.o \
+		src/http/v2/ngx_http_v2_table.c
+
+
+objs/src/http/v2/ngx_http_v2_encode.o:	$(CORE_DEPS) $(HTTP_DEPS) \
+	src/http/v2/ngx_http_v2_encode.c
+	$(CC) -c $(CFLAGS) $(CORE_INCS) $(HTTP_INCS) \
+		-o objs/src/http/v2/ngx_http_v2_encode.o \
+		src/http/v2/ngx_http_v2_encode.c
+
+
+objs/src/http/v2/ngx_http_v2_huff_decode.o:	$(CORE_DEPS) $(HTTP_DEPS) \
+	src/http/v2/ngx_http_v2_huff_decode.c
+	$(CC) -c $(CFLAGS) $(CORE_INCS) $(HTTP_INCS) \
+		-o objs/src/http/v2/ngx_http_v2_huff_decode.o \
+		src/http/v2/ngx_http_v2_huff_decode.c
+
+
+objs/src/http/v2/ngx_http_v2_huff_encode.o:	$(CORE_DEPS) $(HTTP_DEPS) \
+	src/http/v2/ngx_http_v2_huff_encode.c
+	$(CC) -c $(CFLAGS) $(CORE_INCS) $(HTTP_INCS) \
+		-o objs/src/http/v2/ngx_http_v2_huff_encode.o \
+		src/http/v2/ngx_http_v2_huff_encode.c
+
+
+objs/src/http/v2/ngx_http_v2_module.o:	$(CORE_DEPS) $(HTTP_DEPS) \
+	src/http/v2/ngx_http_v2_module.c
+	$(CC) -c $(CFLAGS) $(CORE_INCS) $(HTTP_INCS) \
+		-o objs/src/http/v2/ngx_http_v2_module.o \
+		src/http/v2/ngx_http_v2_module.c
 
 
 objs/src/http/modules/ngx_http_static_module.o:	$(CORE_DEPS) $(HTTP_DEPS) \
@@ -1075,12 +1141,6 @@ objs/src/http/modules/ngx_http_geo_module.o:	$(CORE_DEPS) $(HTTP_DEPS) \
 		-o objs/src/http/modules/ngx_http_geo_module.o \
 		src/http/modules/ngx_http_geo_module.c
 
-objs/src/http/modules/ngx_http_monitor_module.o:	$(CORE_DEPS) $(HTTP_DEPS) \
-	src/http/modules/ngx_http_monitor_module.c
-	$(CC) -c $(CFLAGS) $(CORE_INCS) $(HTTP_INCS) \
-		-o objs/src/http/modules/ngx_http_monitor_module.o \
-		src/http/modules/ngx_http_monitor_module.c
-
 
 objs/src/http/modules/ngx_http_map_module.o:	$(CORE_DEPS) $(HTTP_DEPS) \
 	src/http/modules/ngx_http_map_module.c
@@ -1136,6 +1196,13 @@ objs/src/http/modules/ngx_http_scgi_module.o:	$(CORE_DEPS) $(HTTP_DEPS) \
 	$(CC) -c $(CFLAGS) $(CORE_INCS) $(HTTP_INCS) \
 		-o objs/src/http/modules/ngx_http_scgi_module.o \
 		src/http/modules/ngx_http_scgi_module.c
+
+
+objs/src/http/modules/ngx_http_grpc_module.o:	$(CORE_DEPS) $(HTTP_DEPS) \
+	src/http/modules/ngx_http_grpc_module.c
+	$(CC) -c $(CFLAGS) $(CORE_INCS) $(HTTP_INCS) \
+		-o objs/src/http/modules/ngx_http_grpc_module.o \
+		src/http/modules/ngx_http_grpc_module.c
 
 
 objs/src/http/modules/ngx_http_memcached_module.o:	$(CORE_DEPS) $(HTTP_DEPS) \
@@ -1265,22 +1332,3 @@ install:	build
 
 	test -d '$(DESTDIR)/Users/huoyinghui/github/nginx/logs' \
 		|| mkdir -p '$(DESTDIR)/Users/huoyinghui/github/nginx/logs'
-
-
-run:
-	$(DESTDIR)/objs/nginx -p $(DESTDIR)
-
-quit:
-	$(DESTDIR)/objs/nginx -p $(DESTDIR) -s quit
-
-stop:
-	$(DESTDIR)/objs/nginx -p $(DESTDIR) -s stop
-
-reopen:
-	$(DESTDIR)/objs/nginx -p $(DESTDIR) -s reopen
-
-reload:
-	$(DESTDIR)/objs/nginx -p $(DESTDIR) -s reload
-
-ps:
-	ps -ef | grep nginx

@@ -1,4 +1,4 @@
-#define NGX_CONFIGURE " --prefix=/Users/huoyinghui/github/nginx --with-debug"
+#define NGX_CONFIGURE " --prefix=/Users/huoyinghui/github/nginx --with-debug --with-http_v2_module"
 
 #ifndef NGX_DEBUG
 #define NGX_DEBUG  1
@@ -275,6 +275,16 @@
 
 #ifndef NGX_HTTP_SSI
 #define NGX_HTTP_SSI  1
+#endif
+
+
+#ifndef NGX_HTTP_V2
+#define NGX_HTTP_V2  1
+#endif
+
+
+#ifndef NGX_HTTP_HEADERS
+#define NGX_HTTP_HEADERS  1
 #endif
 
 

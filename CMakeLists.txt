@@ -14,7 +14,9 @@ set(ALL_INCS
         src/http
         src/http/modules
         src/http/modules/perl
-        src/http/modules/v2
+        src/http/v2
+#        src/http/v2/ngx_http_v2.h
+#        src/http/v2/ngx_http_v2_module.h
         objs
         )
 
@@ -190,6 +192,8 @@ set(SOURCE_FILES
         src/http/ngx_http_write_filter_module.c
         src/http/ngx_http_header_filter_module.c
         src/http/modules/ngx_http_chunked_filter_module.c
+        # http v2
+        src/http/v2/ngx_http_v2_filter_module.c
         src/http/modules/ngx_http_range_filter_module.c
         src/http/modules/ngx_http_gzip_filter_module.c
         src/http/ngx_http_postpone_filter_module.c
@@ -199,6 +203,14 @@ set(SOURCE_FILES
         src/http/modules/ngx_http_headers_filter_module.c
         src/http/ngx_http_copy_filter_module.c
         src/http/modules/ngx_http_not_modified_filter_module.c
+        # http2
+        src/http/v2/ngx_http_v2.c
+        src/http/v2/ngx_http_v2_table.c
+        src/http/v2/ngx_http_v2_encode.c
+        src/http/v2/ngx_http_v2_huff_decode.c
+        src/http/v2/ngx_http_v2_huff_encode.c
+        src/http/v2/ngx_http_v2_module.c
+
         src/http/modules/ngx_http_static_module.c
         src/http/modules/ngx_http_autoindex_module.c
         src/http/modules/ngx_http_index_module.c
@@ -219,6 +231,8 @@ set(SOURCE_FILES
         src/http/modules/ngx_http_fastcgi_module.c
         src/http/modules/ngx_http_uwsgi_module.c
         src/http/modules/ngx_http_scgi_module.c
+        # http v2 grpc
+        src/http/modules/ngx_http_grpc_module.c
         src/http/modules/ngx_http_memcached_module.c
         src/http/modules/ngx_http_empty_gif_module.c
         src/http/modules/ngx_http_browser_module.c

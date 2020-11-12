@@ -193,14 +193,27 @@ static ngx_int_t ngx_http_monitor_checker(ngx_http_request_t *r)
     return ngx_http_discard_request_body(r);
 }
 
+typedef struct {
+    ngx_uint_t my_step;
+}ngx_http_mytest_ctx;
+
 static ngx_int_t ngx_http_monitor_handler(ngx_http_request_t *r)
 {
     ngx_int_t rc = ngx_http_monitor_checker(r);
     if (rc != NGX_OK) {
         return rc;
     }
+//    ngx_http_mytest_ctx* myctx = ngx_http_get_module_ctx(r, ngx_http_monitor_module);
+//    if (myctx == NULL) {
+//        myctx = ngx_palloc(r->pool, sizeof(ngx_http_mytest_ctx));
+//        if (myctx == NULL) {
+//            return NGX_ERROR;
+//        }
+//        return rc;
+//    }
     // body 数据
-    ngx_str_t response = ngx_string("hello world");
+//    ngx_http_upstream_t upstream;
+    ngx_str_t response = ngx_string("hello world nginx monitor");
     ngx_str_t type = ngx_string("text/plain");
     // 响应头
     r->headers_out.status = NGX_HTTP_OK;
